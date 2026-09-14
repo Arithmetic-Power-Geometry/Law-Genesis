@@ -82,6 +82,60 @@ Status: exact finite theorem with a direct proof and regression test.
 
 Generated congruence closure itself is standard universal algebra. The framework-specific content is the separation between raw law disagreement and the information cost of the least dynamically compatible common-law quotient. This theorem should therefore be presented as a structural Law-Genesis separation result, not as a claim that congruence generation is new.
 
+## Intrinsic Clock-Free Depth Separation Witness
+
+### Explicit witness
+
+On the four-state carrier `X={0,1,2,3}`, use the common intervention
+
+`P = (1,2,3,0)`,
+
+which is a 4-cycle and therefore has no transient countdown states.
+
+System A consists of
+
+`a1=(3,2,1,3)`,
+
+`a2=(3,0,3,3)`,
+
+`a3=(0,2,1,1)`.
+
+System B consists of
+
+`b1=(2,2,3,0)`,
+
+`b2=(0,2,3,1)`,
+
+`b3=(1,0,3,2)`.
+
+For depths `t=0,1,2`, the two systems match on:
+
+- Law Genesis Cost `Gamma`;
+- common-law congruence class-size profile;
+- raw disagreement-pair count;
+- critical seed rank `beta`;
+- complete one-seed fragility spectrum.
+
+For all three matched depths,
+
+`Gamma_A(t)=Gamma_B(t)=2` bits.
+
+At depth 3, however,
+
+`Gamma_A(3)=2`,
+
+while
+
+`Gamma_B(3)=1.188721875541...` bits.
+
+Thus a depth-3 Law-Genesis separation exists without an explicit delay-line intervention.
+
+### Status and novelty boundary
+
+Status: deterministic computational witness, frozen in `examples/intrinsic_depth_witness.py` and regression-tested in `tests/test_intrinsic_depth_witness.py`.
+
+This is stronger than the explicit delay-lift construction because the shared intervention is a permutation. It is not yet an arbitrary-depth intrinsic theorem. The current open theorem target is a family whose first separating depth grows unboundedly without introducing delay layers or equivalent clock structure.
+
 ## Arbitrary-Delay Law-Genesis Separation
 
 ### Statement
