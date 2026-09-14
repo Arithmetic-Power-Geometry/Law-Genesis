@@ -4,6 +4,7 @@ from examples.nonlinear_depth_witness import INTERVENTIONS, SYSTEM_A, SYSTEM_B
 from law_genesis.core import (
     apply_word,
     class_sizes,
+    disagreement_pairs,
     least_common_law_congruence,
     law_genesis_cost_uniform,
     protocol_cost_uniform,
@@ -46,7 +47,15 @@ def test_expected_class_profiles():
         assert class_sizes(pb) == expected_b[depth]
 
 
-def test_raw_disagreement_counts_match_at_separating_depth():
-    a2 = transformed(SYSTEM_A, 2)
-    b2 = transformed(SYSTEM_B, 2)
-    assert raw_disagreement_count(a2) == raw_disagreement_count(b2)
+def test_exact_raw_disagreement_relations_match_through_separation():
+    expected = [
+        {(0, 1), (0, 2), (0, 4), (1, 2), (1, 4), (2, 4)},
+        {(0, 1), (0, 3), (1, 3)},
+        {(0, 2)},
+    ]
+    for depth in range(3):
+        a = transformed(SYSTEM_A, depth)
+        b = transformed(SYSTEM_B, depth)
+        assert disagreement_pairs(a) == expected[depth]
+        assert disagreement_pairs(b) == expected[depth]
+        assert raw_disagreement_count(a) == raw_disagreement_count(b)
