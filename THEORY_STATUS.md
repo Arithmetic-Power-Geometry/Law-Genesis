@@ -15,7 +15,7 @@ For a finite state space `X` and microscopic law family `F = {f1, ..., fm}`:
 7. Protocol-conditioned `Gamma(w)` evaluates Law Genesis Cost after an intervention word.
 8. Genesis Work sums protocol-conditioned Law Genesis Cost over successive prefixes.
 
-## Exact finite results represented in the repository
+## Exact results represented in the repository
 
 ### Common-law congruence representation
 
@@ -56,7 +56,24 @@ At depth 2 they still have the same raw disagreement-pair count (`1`) and the sa
 
 Thus the matched low-depth summaries do not determine the next common-law closure geometry for this explicit nonlinear multi-law pair.
 
-Status: exact explicit finite witness; strengthened regression tests and generated diagnostics included. It is not yet an arbitrary-depth theorem and is not, by itself, a novelty proof against all neighboring theories.
+Status: exact explicit finite witness; strengthened regression tests and generated diagnostics included.
+
+### Arbitrary-delay Law-Genesis separation theorem
+
+For every prescribed finite depth `D >= 2`, the five-state nonlinear witness can be lifted to two finite three-law systems on a common carrier with one common intervention such that, at every depth `t < D`, the systems have equal `Gamma`, equal common-law class-size profiles, and equal raw disagreement counts, while at depth `D` their Law Genesis Costs differ.
+
+The construction uses a shared delay-line carrier `X x {0,...,d}` with `d = D-2`. Lifted microscopic laws write their outputs into the top layer. The common intervention shifts the active layer downward and applies the original nonlinear intervention only after layer 0 is reached. Before the final two stages the closure is isomorphic to the base depth-0 closure; the next stage is the base depth-1 closure; and the separating stage is the base depth-2 closure.
+
+For `d+1` layers, the separating costs are
+
+- `Gamma_A = ((3/5) log2(3))/(d+1)`;
+- `Gamma_B = 0.4/(d+1)`.
+
+The gap is nonzero for every finite `d`.
+
+Status: exact constructive theorem. The proof is recorded in `THEOREMS.md`; regression tests cover several delays; generated CSV/JSON results are produced by the reproduction script.
+
+Novelty boundary: the delay-line mechanism itself is not claimed as a new automata, semigroup, or control mechanism. The theorem establishes unbounded Law-Genesis depth for the framework, but the next flagship target is an intrinsic nonlinear family whose growing depth does not come from an explicit delay gadget.
 
 ### Exhaustive three-state multi-law depth kill test
 
@@ -74,15 +91,18 @@ Status: exhaustively verified negative result for the stated finite domain. This
 - Jordan/Weyr rank sequences;
 - matroid dependence;
 - noncommuting projection effects;
-- Min-Sum Set Cover and related submodular scheduling reductions.
+- Min-Sum Set Cover and related submodular scheduling reductions;
+- generic delay-line constructions used to postpone observable effects.
 
 In particular, the linear form of the common-law closure reduces to a classical smallest invariant/reachable subspace construction. This is treated as a reduction theorem and novelty boundary, not as a new linear-algebraic mechanism.
 
 ## Current residual research target
 
-The strongest unresolved direction is now sharper: determine whether the strong five-state nonlinear separation can be promoted to an arbitrary-depth or scalable family while preserving matched low-order observables, and whether that surviving statement reduces to standard congruence, automata, semigroup, bisimulation, or control-theoretic invariants.
+The arbitrary-depth existence question is now solved constructively, but only by an explicit delay lift. The strongest unresolved direction is therefore stricter:
 
-The project therefore treats computational searches primarily as falsification tools. A finite passing example is not interpreted as proof of novelty.
+> Find an intrinsic nonlinear multi-law family whose Law-Genesis depth grows with system size because of common-law closure geometry itself, while preserving matched low-order observables, and then test whether that statement reduces to standard congruence, automata, semigroup, bisimulation, or control-theoretic invariants.
+
+The project treats computational searches primarily as falsification tools. A finite passing example or an artificial delay construction is not interpreted as proof of mathematical novelty.
 
 ## Claim discipline
 
