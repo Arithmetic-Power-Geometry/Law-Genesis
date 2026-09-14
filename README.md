@@ -31,9 +31,25 @@ The implementation can:
 - compute Law Genesis Cost for uniform finite systems;
 - apply intervention words and evaluate protocol-conditioned Law Genesis Cost;
 - compute forced-abstraction loss for designated seed identifications;
-- compute a critical seed rank for finite systems;
+- compute exact critical seed rank for small finite systems;
+- compute finite fragility spectra and seed-interaction values;
+- compute protocol profiles and Genesis Work;
 - reproduce the nonlinear three-law depth witness used in the current theory development;
+- reproduce the Law-Genesis-Cost versus critical-seed-rank separation family;
+- exhaustively enumerate all 378 unordered two-law families on a three-state carrier;
 - run automated tests intended as falsification checks rather than demonstrations only.
+
+## Current finite results
+
+The repository includes two complementary checks.
+
+First, the cycle-plus-constant and identity-plus-constant families have the same maximal Law Genesis Cost `log2(n)`, while their critical seed ranks are `1` and `n-1`. This gives an unbounded separation in critical seed rank while Law Genesis Cost is fixed.
+
+Second, exhaustive enumeration of every unordered two-law family on three states gives 378 systems. At each Law Genesis Cost value observed in that search, both `beta = 1` and `beta = 2` occur. Thus Law Genesis Cost does not determine critical seed rank even in the smallest nontrivial search domain used here. Frozen machine-readable results are stored in `results/exhaustive_n3_two_law.json`.
+
+The nonlinear three-law depth construction remains an explicit finite witness rather than an arbitrary-depth theorem.
+
+See `THEORY_STATUS.md` for the proof/computation/reduction status of each claim.
 
 ## Theory boundary
 
@@ -51,16 +67,23 @@ pytest -q
 python scripts/reproduce.py
 ```
 
-The reproduction script writes machine-readable results to `results/`.
+For the standalone exhaustive tiny-system search:
+
+```bash
+python scripts/exhaustive_small_systems.py
+```
+
+The reproduction scripts write machine-readable results to `results/`.
 
 ## Repository structure
 
-- `law_genesis/` — core implementation
+- `law_genesis/` — core implementation and derived metrics
 - `examples/` — explicit finite constructions
-- `scripts/` — reproduction and search utilities
+- `scripts/` — reproduction and exhaustive-search utilities
 - `tests/` — theorem and regression tests
-- `results/` — generated result tables
+- `results/` — frozen/generated result tables
 - `.github/workflows/` — continuous integration
+- `THEORY_STATUS.md` — theorem-status and novelty-boundary ledger
 
 ## Status
 
