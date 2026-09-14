@@ -26,7 +26,16 @@ def write_depth_witness() -> None:
 
     with (RESULTS / "nonlinear_depth_witness.csv").open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["system", "depth", "word", "gamma_bits", "class_sizes", "raw_disagreement_pairs"])
+        writer.writerow([
+            "system",
+            "depth",
+            "word",
+            "gamma_bits",
+            "class_sizes",
+            "raw_disagreement_pairs",
+            "beta",
+            "fragility_order1",
+        ])
         for system, rows in data.items():
             for row in rows:
                 writer.writerow([
@@ -36,6 +45,8 @@ def write_depth_witness() -> None:
                     f"{row['gamma_bits']:.12f}",
                     " ".join(map(str, row["class_sizes"])),
                     row["raw_disagreement_pairs"],
+                    row["beta"],
+                    json.dumps(row["fragility_order1"]),
                 ])
 
 
