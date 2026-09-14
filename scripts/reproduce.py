@@ -11,7 +11,7 @@ if str(ROOT) not in sys.path:
 
 from examples.fragility_separation import evaluate as evaluate_fragility
 from examples.nonlinear_depth_witness import SYSTEM_A, SYSTEM_B, summary
-from scripts.exhaustive_small_systems import enumerate_two_law_systems
+from scripts.exhaustive_small_systems import enumerate_two_law_systems, unordered_family_count
 
 RESULTS = ROOT / "results"
 RESULTS.mkdir(exist_ok=True)
@@ -50,16 +50,16 @@ def write_fragility_family() -> None:
         writer.writerows(rows)
 
 
-def write_exhaustive_n3() -> None:
-    rows = enumerate_two_law_systems(3)
+def write_exhaustive(n: int) -> None:
+    rows = enumerate_two_law_systems(n)
     payload = {
-        "state_count": 3,
+        "state_count": n,
         "law_count": 2,
-        "unordered_law_families": 378,
+        "unordered_law_families": unordered_family_count(n),
         "groups": rows,
-        "claim": "Gamma does not determine critical seed rank beta on three-state deterministic systems.",
+        "claim": f"Gamma does not determine critical seed rank beta on the enumerated {n}-state deterministic systems.",
     }
-    with (RESULTS / "exhaustive_n3_two_law.json").open("w", encoding="utf-8") as f:
+    with (RESULTS / f"exhaustive_n{n}_two_law.json").open("w", encoding="utf-8") as f:
         json.dump(payload, f, indent=2)
         f.write("\n")
 
@@ -67,7 +67,8 @@ def write_exhaustive_n3() -> None:
 def main() -> None:
     write_depth_witness()
     write_fragility_family()
-    write_exhaustive_n3()
+    write_exhaustive(3)
+    write_exhaustive(4)
     print("generated Law Genesis theorem and falsification results")
 
 
