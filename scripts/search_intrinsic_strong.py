@@ -1,14 +1,19 @@
 """Search for a stronger clock-free nonlinear Law-Genesis separation.
 
 This extends ``search_intrinsic_depth.py`` by requiring richer pre-closure
-agreement through depth 2.  Candidate pairs use the same permutation
+agreement through depth 2. Candidate pairs use the same permutation
 intervention, match Law Genesis Cost and common-law class profile, and also
 match the isomorphism type of the raw disagreement graph plus the sorted
-per-state microscopic-output multiplicities.  Strong candidates are then
+per-state microscopic-output multiplicities. Strong candidates are then
 checked for equal critical seed rank and equal complete one-seed fragility
 spectrum before a depth-3 Gamma separation is accepted.
 
-A positive result is a finite computational witness.  A negative result is
+The deterministic sample domain, RNG seed, intervention class, and acceptance
+criteria are fixed. This implementation caches the expensive graph-canonical
+forms and strong signatures so the same search can finish substantially faster
+without changing its mathematical scope.
+
+A positive result is a finite computational witness. A negative result is
 only a negative result for this deterministic sampled search budget.
 
 Copyright (C) 2026 Mohammad Amir Khusru Akhtar
@@ -20,6 +25,7 @@ from __future__ import annotations
 import json
 import random
 from collections import defaultdict
+from functools import lru_cache
 from itertools import permutations
 from pathlib import Path
 
@@ -36,6 +42,7 @@ N = 4
 LAW_COUNT = 3
 SAMPLES_PER_INTERVENTION = 4000
 RNG_SEED = 2026091402
+PERMUTATIONS = tuple(permutations(range(N)))
 
 
 def random_law(rng: random.Random) -> tuple[int, ...]:
@@ -47,14 +54,20 @@ def transformed(laws, intervention, depth: int):
     return tuple(apply_word(law, interventions, "P" * depth) for law in laws)
 
 
-def canonical_relation(relation) -> tuple[tuple[int, int], ...]:
+@lru_cache(maxsize=128)
+def canonical_relation_cached(relation_key: tuple[tuple[int, int], ...]) -> tuple[tuple[int, int], ...]:
     """Canonical unlabeled simple-graph form of a disagreement relation."""
     best = None
-    for p in permutations(range(N)):
-        mapped = tuple(sorted((min(p[a], p[b]), max(p[a], p[b])) for a, b in relation))
+    for p in PERMUTATIONS:
+        mapped = tuple(sorted((min(p[a], p[b]), max(p[a], p[b])) for a, b in relation_key))
         if best is None or mapped < best:
             best = mapped
     return best or ()
+
+
+def canonical_relation(relation) -> tuple[tuple[int, int], ...]:
+    key = tuple(sorted((min(a, b), max(a, b)) for a, b in relation))
+    return canonical_relation_cached(key)
 
 
 def output_multiplicity_signature(laws) -> tuple[int, ...]:
@@ -77,7 +90,8 @@ def cheap_signature(laws, intervention, max_depth: int = 2):
     return tuple(rows)
 
 
-def strong_signature(laws, intervention, max_depth: int = 2):
+@lru_cache(maxsize=250000)
+def strong_signature_cached(laws, intervention, max_depth: int = 2):
     rows = []
     for depth in range(max_depth + 1):
         cur = transformed(laws, intervention, depth)
@@ -86,8 +100,17 @@ def strong_signature(laws, intervention, max_depth: int = 2):
     return tuple(rows)
 
 
-def gamma_at(laws, intervention, depth: int) -> float:
+def strong_signature(laws, intervention, max_depth: int = 2):
+    return strong_signature_cached(tuple(laws), tuple(intervention), max_depth)
+
+
+@lru_cache(maxsize=250000)
+def gamma_at_cached(laws, intervention, depth: int) -> float:
     return round(law_genesis_cost_uniform(transformed(laws, intervention, depth)), 12)
+
+
+def gamma_at(laws, intervention, depth: int) -> float:
+    return gamma_at_cached(tuple(laws), tuple(intervention), depth)
 
 
 def search() -> dict:
@@ -96,7 +119,7 @@ def search() -> dict:
     cheap_collisions = 0
     strong_collisions = 0
 
-    for intervention in permutations(range(N)):
+    for intervention in PERMUTATIONS:
         buckets: dict[tuple, list[tuple[tuple[int, ...], ...]]] = defaultdict(list)
         for _ in range(SAMPLES_PER_INTERVENTION):
             laws = tuple(random_law(rng) for _ in range(LAW_COUNT))
