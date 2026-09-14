@@ -1,9 +1,8 @@
 """Exhaustive enumeration of tiny deterministic Law-Genesis systems.
 
-The default n=3, two-law run is small enough for CI and is used as a
-falsification/regression search.  It groups systems by Law Genesis Cost and
-critical seed rank, showing that Gamma does not determine beta even on three
-states.
+The search treats a two-law microscopic family {f,g} as unordered, including
+f=g.  For each family it computes Law Genesis Cost and exact critical seed rank
+and then groups systems by the pair (Gamma, beta).
 
 Copyright (C) 2026 Mohammad Amir Khusru Akhtar
 Licensed under the Apache License, Version 2.0.
@@ -11,6 +10,7 @@ Licensed under the Apache License, Version 2.0.
 
 from __future__ import annotations
 
+import argparse
 import json
 from collections import Counter
 from itertools import product
@@ -24,12 +24,18 @@ def transformations(n: int):
     yield from product(range(n), repeat=n)
 
 
+def unordered_family_count(n: int) -> int:
+    m = n**n
+    return m * (m + 1) // 2
+
+
 def enumerate_two_law_systems(n: int = 3):
+    if n < 1:
+        raise ValueError("n must be positive")
     maps = list(transformations(n))
     counts: Counter[tuple[float, int]] = Counter()
     examples: dict[tuple[float, int], tuple[tuple[int, ...], tuple[int, ...]]] = {}
 
-    # Treat {f,g} as an unordered microscopic-law family, including f=g.
     for i, f in enumerate(maps):
         for g in maps[i:]:
             laws = (f, g)
@@ -54,22 +60,29 @@ def enumerate_two_law_systems(n: int = 3):
     return rows
 
 
-def main() -> None:
-    rows = enumerate_two_law_systems(3)
-    out = Path("results")
-    out.mkdir(exist_ok=True)
-    payload = {
-        "state_count": 3,
+def payload(n: int) -> dict:
+    return {
+        "state_count": n,
         "law_count": 2,
-        "unordered_law_families": 378,
-        "groups": rows,
-        "claim": "Gamma does not determine critical seed rank beta on three-state deterministic systems.",
+        "unordered_law_families": unordered_family_count(n),
+        "groups": enumerate_two_law_systems(n),
+        "claim": f"Gamma does not determine critical seed rank beta on the enumerated {n}-state deterministic systems.",
     }
-    path = out / "exhaustive_n3_two_law.json"
-    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+def write_payload(n: int, out: Path = Path("results")) -> Path:
+    out.mkdir(exist_ok=True)
+    path = out / f"exhaustive_n{n}_two_law.json"
+    path.write_text(json.dumps(payload(n), indent=2) + "\n", encoding="utf-8")
+    return path
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--n", type=int, default=3, choices=(2, 3, 4))
+    args = parser.parse_args()
+    path = write_payload(args.n)
     print(path)
-    for row in rows:
-        print(row)
 
 
 if __name__ == "__main__":
