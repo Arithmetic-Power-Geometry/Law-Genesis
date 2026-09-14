@@ -20,7 +20,7 @@ classifiers = [
 dev = ["pytest>=8.0"]
 
 [tool.setuptools.packages.find]
-include = ["law_genesis*"]
+include = ["law_genesis*", "examples*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
