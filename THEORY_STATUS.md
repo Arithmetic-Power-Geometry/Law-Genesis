@@ -39,11 +39,32 @@ For four states, the separation is stronger: systems with the same `Gamma` occur
 
 Status: exhaustive finite computation; frozen machine-readable results in `results/exhaustive_n3_two_law.json` and `results/exhaustive_n4_two_law.json`.
 
-### Nonlinear common-law depth witness
+### Strong nonlinear common-law depth witness
 
-A three-law nonlinear construction has equal Law Genesis Cost at the first two observed depths and separates at the next depth. The witness is retained as a finite benchmark, not as an arbitrary-depth theorem.
+The five-state three-law witness uses the same intervention in both systems. At depths 0 and 1 the two systems agree on all of the following recorded observables:
 
-Status: exact explicit finite witness; regression test and generated results included.
+- Law Genesis Cost `Gamma`;
+- common-law congruence class-size profile;
+- raw disagreement-pair count;
+- critical seed rank `beta`;
+- the complete one-seed fragility spectrum.
+
+At depth 2 they still have the same raw disagreement-pair count (`1`) and the same critical seed rank (`2`), yet the common-law closures differ:
+
+- System A has class sizes `(3,1,1)` and `Gamma = (3/5) log2(3) ≈ 0.95098` bits;
+- System B has class sizes `(2,1,1,1)` and `Gamma = 0.4` bits.
+
+Thus the matched low-depth summaries do not determine the next common-law closure geometry for this explicit nonlinear multi-law pair.
+
+Status: exact explicit finite witness; strengthened regression tests and generated diagnostics included. It is not yet an arbitrary-depth theorem and is not, by itself, a novelty proof against all neighboring theories.
+
+### Exhaustive three-state multi-law depth kill test
+
+The repository exhaustively tested all unordered three-law families on three states against every three-state intervention. The search required two candidate systems to use the same intervention and to agree at depths 0 and 1 on `Gamma`, class-size profile, raw disagreement count, `beta`, and the complete one-seed fragility spectrum; it also required equal raw disagreement count at depth 2 while seeking a different depth-2 `Gamma`.
+
+No witness exists inside this complete three-state search domain under those constraints.
+
+Status: exhaustively verified negative result for the stated finite domain. This does not rule out four-state or larger witnesses and is not a general impossibility theorem.
 
 ## Established machinery that is not claimed as new
 
@@ -59,7 +80,7 @@ In particular, the linear form of the common-law closure reduces to a classical 
 
 ## Current residual research target
 
-The strongest unresolved direction is to determine whether nonlinear multi-law common-law closure has structural separation results that cannot be reduced to standard congruence, automata, semigroup, bisimulation, or control-theoretic invariants.
+The strongest unresolved direction is now sharper: determine whether the strong five-state nonlinear separation can be promoted to an arbitrary-depth or scalable family while preserving matched low-order observables, and whether that surviving statement reduces to standard congruence, automata, semigroup, bisimulation, or control-theoretic invariants.
 
 The project therefore treats computational searches primarily as falsification tools. A finite passing example is not interpreted as proof of novelty.
 
