@@ -1,0 +1,9 @@
+[
+  {"n": 2, "gamma_a": 1.0, "gamma_b": 1.0, "expected_gamma": 1.0, "beta_a": 1, "beta_b": 1, "beta_ratio": 1.0},
+  {"n": 3, "gamma_a": 1.584962500721156, "gamma_b": 1.584962500721156, "expected_gamma": 1.584962500721156, "beta_a": 1, "beta_b": 2, "beta_ratio": 2.0},
+  {"n": 4, "gamma_a": 2.0, "gamma_b": 2.0, "expected_gamma": 2.0, "beta_a": 1, "beta_b": 3, "beta_ratio": 3.0},
+  {"n": 5, "gamma_a": 2.321928094887362, "gamma_b": 2.321928094887362, "expected_gamma": 2.321928094887362, "beta_a": 1, "beta_b": 4, "beta_ratio": 4.0},
+  {"n": 6, "gamma_a": 2.584962500721156, "gamma_b": 2.584962500721156, "expected_gamma": 2.584962500721156, "beta_a": 1, "beta_b": 5, "beta_ratio": 5.0},
+  {"n": 7, "gamma_a": 2.807354922057604, "gamma_b": 2.807354922057604, "expected_gamma": 2.807354922057604, "beta_a": 1, "beta_b": 6, "beta_ratio": 6.0},
+  {"n": 8, "gamma_a": 3.0, "gamma_b": 3.0, "expected_gamma": 3.0, "beta_a": 1, "beta_b": 7, "beta_ratio": 7.0}
+]
