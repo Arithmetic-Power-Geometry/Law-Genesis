@@ -40,7 +40,7 @@ Run the stronger intrinsic search requiring agreement through the matched depths
 
 If a witness is found, freeze it. If none is found, freeze the negative result with the precise search domain. Do not silently expand the claim beyond the search domain.
 
-Status: running.
+Status: running in GitHub Actions.
 
 ## Gate 4 — Prior-art collision pass
 
@@ -55,7 +55,7 @@ Before manuscript drafting, compare the surviving claims specifically against:
 
 The paper must explicitly state every exact reduction or overlap that survives this pass.
 
-Status: partially complete; one focused final pass remains for the intrinsic nonlinear claims.
+Status: satisfied for the current v1.0 claim set. The focused boundary ledger is recorded in `PRIOR_ART_KILL_PASS.md`. Future new theorem families require a fresh collision check.
 
 ## Gate 5 — Reproducibility freeze
 
@@ -89,12 +89,12 @@ The paper should not claim that generated congruences, reachability, automata pr
 
 ## Recommended manuscript trigger
 
-The recommended trigger is:
+The recommended trigger is now:
 
 1. finish the current strong-invariant intrinsic search;
-2. perform one final focused prior-art kill pass on the surviving intrinsic statement;
-3. freeze the resulting witness or negative result;
+2. freeze its witness or precise negative result;
+3. synchronize `THEOREMS.md`, `THEORY_STATUS.md`, generated results, and regression tests;
 4. confirm the complete CI workflow is green;
 5. then begin the paper immediately.
 
-An arbitrary-depth intrinsic theorem would strengthen the paper further, but it is not required to begin writing once the above gates are met. It can remain a clearly labeled open problem if no proof is found after a bounded theorem-search phase.
+The focused prior-art kill pass is already complete for the present claim set. An arbitrary-depth intrinsic theorem would strengthen the paper further, but it is not required to begin writing once the remaining Gate 3 and Gate 5 tasks are complete. It can remain a clearly labeled open problem if no proof is found after a bounded theorem-search phase.
