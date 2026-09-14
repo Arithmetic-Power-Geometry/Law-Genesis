@@ -1,0 +1,22 @@
+{
+  "status": "NO_WITNESS_FOUND",
+  "carrier_size": 4,
+  "law_count": 3,
+  "intervention_class": "all 24 permutations of four states",
+  "samples_per_intervention": 4000,
+  "tested_random_systems": 96000,
+  "cheap_collisions": 94180,
+  "strong_collisions": 208367,
+  "matched_depths_required": [0, 1, 2],
+  "target_separating_depth": 3,
+  "matched_invariants": [
+    "Gamma",
+    "common-law class-size profile",
+    "raw disagreement graph isomorphism type",
+    "sorted per-state microscopic-output multiplicities",
+    "critical seed rank beta",
+    "complete one-seed fragility spectrum"
+  ],
+  "seed": 2026091402,
+  "scope_note": "Negative only for this deterministic sampled search domain; not a theorem of impossibility."
+}
