@@ -25,7 +25,7 @@ Status: mathematical theorem; implementation provided by `least_common_law_congr
 
 ### Fixed raw-disagreement separation
 
-The five-state nonlinear construction yields two three-law systems whose raw disagreement relations are not merely equal in cardinality but are exactly identical at the separating stage:
+The five-state nonlinear construction yields two three-law systems whose raw disagreement relations are exactly identical at the separating stage:
 
 `R_A = R_B = {(0,2)}`.
 
@@ -34,9 +34,7 @@ Nevertheless their least common-law congruences differ:
 - System A: `{{0,1,2},{3},{4}}`, giving `Gamma = (3/5) log2(3)`;
 - System B: `{{0,2},{1},{3},{4}}`, giving `Gamma = 0.4` bits.
 
-A direct proof is recorded in `THEOREMS.md`: in A, compatibility of the seed pair `0~2` under one transformed law forces `1~0`, whereas in B every transformed law maps the pair `{0,2}` back into itself, so no third state is forced into the class.
-
-Stronger still, under the shared intervention the two systems have exactly the same raw disagreement relation at every observed depth 0, 1, and 2, while their common-law congruences first diverge at depth 2.
+A direct proof is recorded in `THEOREMS.md`. Stronger still, under the shared intervention the two systems have exactly the same raw disagreement relation at observed depths 0, 1, and 2, while their common-law congruences first diverge at depth 2.
 
 Status: exact finite structural theorem with direct proof and regression test.
 
@@ -52,9 +50,7 @@ Status: exact finite family; regression tests included.
 
 All 378 unordered two-law families on a three-state carrier and all 32,896 unordered two-law families on a four-state carrier were enumerated.
 
-For three states, every observed Law Genesis Cost value occurs with more than one critical seed rank.
-
-For four states, the separation is stronger: systems with the same `Gamma` occur with `beta` values ranging across multiple levels. In particular, at `Gamma = 2` bits there are systems with `beta = 1`, `beta = 2`, and `beta = 3`.
+For three states, every observed Law Genesis Cost value occurs with more than one critical seed rank. For four states, at `Gamma = 2` bits there are systems with `beta = 1`, `beta = 2`, and `beta = 3`.
 
 Status: exhaustive finite computation; frozen machine-readable results in `results/exhaustive_n3_two_law.json` and `results/exhaustive_n4_two_law.json`.
 
@@ -65,6 +61,32 @@ The five-state three-law witness uses the same intervention in both systems. At 
 At depth 2 they still have the same exact raw disagreement relation `R={(0,2)}` and the same critical seed rank `beta=2`, yet the common-law closures and Law Genesis Costs differ.
 
 Status: exact explicit finite witness; strengthened regression tests and generated diagnostics included.
+
+### Clock-free four-state permutation witness
+
+A four-state, three-law pair under the common permutation intervention `P=(1,2,3,0)` matches through depths 0, 1, and 2 on `Gamma`, common-law class-size profile, raw disagreement count, critical seed rank, and complete one-seed fragility spectrum, but separates at depth 3:
+
+- System A: `Gamma(3)=2` bits;
+- System B: `Gamma(3)=1.188721875541` bits.
+
+The intervention is a permutation, so the construction contains no transient countdown layers.
+
+Status: deterministic computational witness, frozen in source and regression tests. It is not an arbitrary-depth theorem.
+
+### Strong-invariant four-state kill test
+
+A stronger deterministic search tested 96,000 sampled three-law systems across all 24 four-state permutation interventions. Candidate pairs were required to match through depths 0, 1, and 2 on:
+
+- `Gamma`;
+- common-law class-size profile;
+- raw disagreement graph isomorphism type;
+- sorted per-state microscopic-output multiplicities;
+- critical seed rank `beta`;
+- complete one-seed fragility spectrum.
+
+The search examined 94,180 cheap-signature collisions and 208,367 strong-signature comparisons and found no pair whose `Gamma` separated at depth 3.
+
+Status: deterministic negative computational result for the stated sample budget and search domain. It is not an impossibility theorem. Frozen output: `results/intrinsic_strong_search.json`.
 
 ### Arbitrary-delay Law-Genesis separation theorem
 
@@ -95,13 +117,18 @@ In particular, the linear form of the common-law closure reduces to a classical 
 
 ## Current residual research target
 
-The strongest current structural result is now the fixed raw-disagreement separation, because it isolates the specific Law-Genesis phenomenon without relying on a delay gadget: identical raw disagreement can generate different dynamically forced abstractions.
+The v1.0 flagship foundations result set is now frozen sufficiently for manuscript drafting. The strongest structural theorem remains the fixed raw-disagreement separation: identical raw disagreement can generate different dynamically forced abstractions and different information costs.
 
-The next target is therefore not merely a longer protocol depth. It is to strengthen the fixed-disagreement theorem by matching progressively richer pre-closure invariants while still forcing different least common-law congruences. Candidate invariants include the exact raw disagreement graph, per-state output multiplicities, degree sequence, orbit summaries, and low-order closure statistics.
+The four-state intrinsic permutation witness demonstrates later divergence without an explicit delay gadget. The stronger 96,000-system search did not find a depth-3 witness after additionally matching richer pre-closure invariants; this should be reported as a bounded negative computational result, not as evidence of impossibility.
 
-A scalable family of such separations would be stronger than an arbitrary-depth result produced only by semigroup timing.
+Open problems include:
 
-The project treats computational searches primarily as falsification tools. A finite witness, passing software test, or artificial delay construction is not interpreted as proof of novelty against neighboring literatures.
+- arbitrary-depth intrinsic nonlinear separation without a delay gadget;
+- scalable fixed-disagreement families with richer matched pre-closure invariants;
+- sharper complexity bounds for common-law congruence computation and fragility quantities;
+- approximate Law Genesis Cost `Gamma_epsilon`.
+
+These are now post-v1.0 research directions rather than prerequisites for the first foundations paper.
 
 ## Claim discipline
 
@@ -110,5 +137,6 @@ Results should be labeled as one of:
 - **proved** — supported by a mathematical proof;
 - **exhaustively verified** — all systems inside a stated finite search domain were enumerated;
 - **computational witness** — a particular finite construction was verified;
+- **deterministic negative search** — no witness was found inside a precisely stated sampled search domain;
 - **conjecture/open** — not established;
 - **reduction** — shown to coincide with established mathematics.
