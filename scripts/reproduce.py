@@ -2,13 +2,17 @@ from __future__ import annotations
 
 import csv
 import json
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
 from examples.fragility_separation import evaluate as evaluate_fragility
 from examples.nonlinear_depth_witness import SYSTEM_A, SYSTEM_B, summary
 from scripts.exhaustive_small_systems import enumerate_two_law_systems
 
-ROOT = Path(__file__).resolve().parents[1]
 RESULTS = ROOT / "results"
 RESULTS.mkdir(exist_ok=True)
 
