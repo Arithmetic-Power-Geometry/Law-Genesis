@@ -4,12 +4,12 @@ This checklist defines the last synchronization pass before the flagship Law Gen
 
 ## 1. Strong intrinsic search
 
-- Run `scripts/search_intrinsic_strong.py` with the frozen deterministic seed and search budget.
-- Preserve the exact output in `results/intrinsic_strong_search.json`.
-- If a witness is found, promote it to an explicit example module and regression test.
-- If no witness is found, record the exact negative search domain and do not generalize it into an impossibility theorem.
+- `scripts/search_intrinsic_strong.py` completed with the frozen deterministic seed and search budget.
+- Exact output is preserved in `results/intrinsic_strong_search.json`.
+- Result: no witness was found among 96,000 sampled three-law systems across all 24 four-state permutation interventions under the stronger matched-invariant constraints.
+- This is recorded only as a deterministic negative sampled search, not as an impossibility theorem.
 
-Status: pending completion of the current optimized CI run.
+Status: complete.
 
 ## 2. Headline theorem ledger
 
@@ -21,8 +21,11 @@ The manuscript may use the following statements only with their stated status:
 - Exhaustive two-law three- and four-state separations — exhaustively verified finite computation.
 - Five-state nonlinear common-law depth witness — exact explicit finite witness.
 - Four-state permutation depth witness — deterministic clock-free computational witness.
+- Strong-invariant four-state search — deterministic negative sampled search; no depth-3 witness found in the stated domain.
 - Arbitrary-Delay Law-Genesis Separation — proved constructive theorem, with explicit delay-line novelty boundary.
 - Arbitrary-depth intrinsic nonlinear separation — open.
+
+Status: complete for v1.0.
 
 ## 3. Novelty boundary
 
@@ -42,21 +45,27 @@ The central framework claim should instead be framed around the structured coupl
 
 `raw microscopic law disagreement -> least law-compatible closure -> information cost -> forced abstraction -> fragility -> sequential separation`.
 
+Status: complete for the current claim set; see `PRIOR_ART_KILL_PASS.md`.
+
 ## 4. Reproducibility freeze
 
-Before manuscript drafting:
+The checked final-freeze workflow completed successfully for:
 
-- `pytest -q` must pass;
-- `python scripts/reproduce.py` must pass;
-- `python scripts/search_multilaw_depth.py` must pass;
-- `python scripts/search_intrinsic_depth.py` must pass;
-- `python scripts/search_intrinsic_strong.py` must complete;
-- all headline results must be represented in committed source or result files;
-- `THEOREMS.md`, `THEORY_STATUS.md`, `PAPER_READINESS.md`, and result files must agree.
+- `pytest -q`;
+- `python scripts/reproduce.py`;
+- `python scripts/search_multilaw_depth.py`;
+- `python scripts/search_intrinsic_depth.py`;
+- `python scripts/search_intrinsic_strong.py`.
+
+All headline results are now represented in committed source, theorem/status files, or committed machine-readable result files. `THEORY_STATUS.md`, `PAPER_READINESS.md`, and this checklist have been synchronized to the strong-search outcome.
+
+Status: complete for v1.0.
 
 ## 5. Manuscript trigger
 
-Once Sections 1–4 are complete, stop broad theory invention and begin the flagship foundations paper.
+Sections 1–4 are complete.
+
+Status: MANUSCRIPT DRAFTING SHOULD START NOW.
 
 Recommended narrative:
 
@@ -70,4 +79,4 @@ Recommended narrative:
 8. computational falsification and reproducibility;
 9. open problems, especially arbitrary-depth intrinsic separation.
 
-The manuscript should mark every claim as proved, exhaustively verified, deterministic computational witness, reduction, or open.
+The manuscript should mark every claim as proved, exhaustively verified, deterministic computational witness, deterministic negative sampled search, reduction, or open.
