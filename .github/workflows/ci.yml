@@ -18,3 +18,4 @@ jobs:
       - run: python scripts/reproduce.py
       - run: python scripts/search_multilaw_depth.py
       - run: python scripts/search_intrinsic_depth.py
+      - run: python scripts/search_intrinsic_strong.py
