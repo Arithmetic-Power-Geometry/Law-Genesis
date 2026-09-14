@@ -1,0 +1,50 @@
+{
+  "state_count": 3,
+  "law_count": 2,
+  "unordered_law_families": 378,
+  "groups": [
+    {
+      "gamma": 0.0,
+      "beta": 1,
+      "count": 23,
+      "example_f": [0, 0, 1],
+      "example_g": [0, 0, 1]
+    },
+    {
+      "gamma": 0.0,
+      "beta": 2,
+      "count": 4,
+      "example_f": [0, 0, 0],
+      "example_g": [0, 0, 0]
+    },
+    {
+      "gamma": 0.666666666667,
+      "beta": 1,
+      "count": 102,
+      "example_f": [0, 0, 0],
+      "example_g": [0, 0, 1]
+    },
+    {
+      "gamma": 0.666666666667,
+      "beta": 2,
+      "count": 3,
+      "example_f": [0, 0, 0],
+      "example_g": [1, 1, 1]
+    },
+    {
+      "gamma": 1.584962500721,
+      "beta": 1,
+      "count": 243,
+      "example_f": [0, 0, 0],
+      "example_g": [0, 2, 1]
+    },
+    {
+      "gamma": 1.584962500721,
+      "beta": 2,
+      "count": 3,
+      "example_f": [0, 0, 0],
+      "example_g": [0, 1, 2]
+    }
+  ],
+  "claim": "Gamma does not determine critical seed rank beta on three-state deterministic systems."
+}
