@@ -23,6 +23,25 @@ A quotient supports one effective law for all microscopic laws exactly when its 
 
 Status: mathematical theorem; implementation provided by `least_common_law_congruence`.
 
+### Fixed raw-disagreement separation
+
+The five-state nonlinear construction yields two three-law systems whose raw disagreement relations are not merely equal in cardinality but are exactly identical at the separating stage:
+
+`R_A = R_B = {(0,2)}`.
+
+Nevertheless their least common-law congruences differ:
+
+- System A: `{{0,1,2},{3},{4}}`, giving `Gamma = (3/5) log2(3)`;
+- System B: `{{0,2},{1},{3},{4}}`, giving `Gamma = 0.4` bits.
+
+A direct proof is recorded in `THEOREMS.md`: in A, compatibility of the seed pair `0~2` under one transformed law forces `1~0`, whereas in B every transformed law maps the pair `{0,2}` back into itself, so no third state is forced into the class.
+
+Stronger still, under the shared intervention the two systems have exactly the same raw disagreement relation at every observed depth 0, 1, and 2, while their common-law congruences first diverge at depth 2.
+
+Status: exact finite structural theorem with direct proof and regression test.
+
+Interpretation: the amount and identity of raw microscopic disagreement do not determine the information cost of making that disagreement dynamically consistent. The closure geometry matters.
+
 ### Law Genesis Cost versus critical seed rank
 
 The cycle-plus-constant family and identity-plus-constant family have the same maximal Law Genesis Cost `log2(n)`, but their critical seed ranks are respectively `1` and `n-1`.
@@ -41,20 +60,9 @@ Status: exhaustive finite computation; frozen machine-readable results in `resul
 
 ### Strong nonlinear common-law depth witness
 
-The five-state three-law witness uses the same intervention in both systems. At depths 0 and 1 the two systems agree on all of the following recorded observables:
+The five-state three-law witness uses the same intervention in both systems. At depths 0 and 1 the two systems agree on Law Genesis Cost, common-law class-size profile, exact raw disagreement relation, critical seed rank, and the complete one-seed fragility spectrum.
 
-- Law Genesis Cost `Gamma`;
-- common-law congruence class-size profile;
-- raw disagreement-pair count;
-- critical seed rank `beta`;
-- the complete one-seed fragility spectrum.
-
-At depth 2 they still have the same raw disagreement-pair count (`1`) and the same critical seed rank (`2`), yet the common-law closures differ:
-
-- System A has class sizes `(3,1,1)` and `Gamma = (3/5) log2(3) ≈ 0.95098` bits;
-- System B has class sizes `(2,1,1,1)` and `Gamma = 0.4` bits.
-
-Thus the matched low-depth summaries do not determine the next common-law closure geometry for this explicit nonlinear multi-law pair.
+At depth 2 they still have the same exact raw disagreement relation `R={(0,2)}` and the same critical seed rank `beta=2`, yet the common-law closures and Law Genesis Costs differ.
 
 Status: exact explicit finite witness; strengthened regression tests and generated diagnostics included.
 
@@ -62,26 +70,15 @@ Status: exact explicit finite witness; strengthened regression tests and generat
 
 For every prescribed finite depth `D >= 2`, the five-state nonlinear witness can be lifted to two finite three-law systems on a common carrier with one common intervention such that, at every depth `t < D`, the systems have equal `Gamma`, equal common-law class-size profiles, and equal raw disagreement counts, while at depth `D` their Law Genesis Costs differ.
 
-The construction uses a shared delay-line carrier `X x {0,...,d}` with `d = D-2`. Lifted microscopic laws write their outputs into the top layer. The common intervention shifts the active layer downward and applies the original nonlinear intervention only after layer 0 is reached. Before the final two stages the closure is isomorphic to the base depth-0 closure; the next stage is the base depth-1 closure; and the separating stage is the base depth-2 closure.
-
-For `d+1` layers, the separating costs are
-
-- `Gamma_A = ((3/5) log2(3))/(d+1)`;
-- `Gamma_B = 0.4/(d+1)`.
-
-The gap is nonzero for every finite `d`.
-
 Status: exact constructive theorem. The proof is recorded in `THEOREMS.md`; regression tests cover several delays; generated CSV/JSON results are produced by the reproduction script.
 
-Novelty boundary: the delay-line mechanism itself is not claimed as a new automata, semigroup, or control mechanism. The theorem establishes unbounded Law-Genesis depth for the framework, but the next flagship target is an intrinsic nonlinear family whose growing depth does not come from an explicit delay gadget.
+Novelty boundary: the delay-line mechanism itself is not claimed as a new automata, semigroup, or control mechanism. It establishes unbounded Law-Genesis depth inside the framework but is not the flagship novelty claim.
 
 ### Exhaustive three-state multi-law depth kill test
 
-The repository exhaustively tested all unordered three-law families on three states against every three-state intervention. The search required two candidate systems to use the same intervention and to agree at depths 0 and 1 on `Gamma`, class-size profile, raw disagreement count, `beta`, and the complete one-seed fragility spectrum; it also required equal raw disagreement count at depth 2 while seeking a different depth-2 `Gamma`.
+The repository exhaustively tested all unordered three-law families on three states against every three-state intervention under strong matching constraints. No depth-2 separating witness exists inside that complete domain.
 
-No witness exists inside this complete three-state search domain under those constraints.
-
-Status: exhaustively verified negative result for the stated finite domain. This does not rule out four-state or larger witnesses and is not a general impossibility theorem.
+Status: exhaustively verified negative result for the stated finite domain. This is not a general impossibility theorem.
 
 ## Established machinery that is not claimed as new
 
@@ -94,15 +91,17 @@ Status: exhaustively verified negative result for the stated finite domain. This
 - Min-Sum Set Cover and related submodular scheduling reductions;
 - generic delay-line constructions used to postpone observable effects.
 
-In particular, the linear form of the common-law closure reduces to a classical smallest invariant/reachable subspace construction. This is treated as a reduction theorem and novelty boundary, not as a new linear-algebraic mechanism.
+In particular, the linear form of the common-law closure reduces to a classical smallest invariant/reachable subspace construction. Repeated application of a single deterministic intervention also lies inside ordinary finite transformation-semigroup dynamics. These are treated as reduction boundaries, not new mechanisms.
 
 ## Current residual research target
 
-The arbitrary-depth existence question is now solved constructively, but only by an explicit delay lift. The strongest unresolved direction is therefore stricter:
+The strongest current structural result is now the fixed raw-disagreement separation, because it isolates the specific Law-Genesis phenomenon without relying on a delay gadget: identical raw disagreement can generate different dynamically forced abstractions.
 
-> Find an intrinsic nonlinear multi-law family whose Law-Genesis depth grows with system size because of common-law closure geometry itself, while preserving matched low-order observables, and then test whether that statement reduces to standard congruence, automata, semigroup, bisimulation, or control-theoretic invariants.
+The next target is therefore not merely a longer protocol depth. It is to strengthen the fixed-disagreement theorem by matching progressively richer pre-closure invariants while still forcing different least common-law congruences. Candidate invariants include the exact raw disagreement graph, per-state output multiplicities, degree sequence, orbit summaries, and low-order closure statistics.
 
-The project treats computational searches primarily as falsification tools. A finite passing example or an artificial delay construction is not interpreted as proof of mathematical novelty.
+A scalable family of such separations would be stronger than an arbitrary-depth result produced only by semigroup timing.
+
+The project treats computational searches primarily as falsification tools. A finite witness, passing software test, or artificial delay construction is not interpreted as proof of novelty against neighboring literatures.
 
 ## Claim discipline
 
