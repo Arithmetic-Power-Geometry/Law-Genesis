@@ -8,6 +8,80 @@ Let `F = {f1, ..., fm}` be deterministic maps on a finite set `X`. Let `R_F` con
 
 This is an application of standard generated-congruence machinery to the common-law constraint.
 
+## Fixed Raw-Disagreement Separation
+
+### Statement
+
+There exist two finite three-law systems `A` and `B` on the same five-state carrier such that their raw disagreement relations are exactly equal,
+
+`R_A = R_B`,
+
+but their least common-law congruences are different and therefore their Law Genesis Costs are different.
+
+For the explicit depth-2 transformed witness in `examples/nonlinear_depth_witness.py`, both systems have
+
+`R_A = R_B = {(0,2)}`.
+
+Nevertheless,
+
+`Theta_A = {{0,1,2},{3},{4}}`,
+
+while
+
+`Theta_B = {{0,2},{1},{3},{4}}`.
+
+Therefore
+
+`Gamma(A) = (3/5) log2(3)`,
+
+whereas
+
+`Gamma(B) = 2/5 = 0.4` bits.
+
+Hence the raw microscopic disagreement relation alone does not determine the dynamically compatible abstraction forced by those disagreements.
+
+### Direct proof for the explicit pair
+
+For System A at the separating depth, the transformed laws are
+
+`a1 = (1,0,0,0,2)`,
+
+`a2 = (1,2,2,0,0)`,
+
+`a3 = (1,0,0,0,0)`.
+
+The only raw disagreement pair is `0 ~ 2`. Compatibility with `a1` then forces
+
+`a1(0)=1 ~ a1(2)=0`,
+
+so `0,1,2` must lie in one congruence class. No further identification with states 3 or 4 is forced. Thus the least common-law congruence has class sizes `(3,1,1)`.
+
+For System B at the same depth, the transformed laws are
+
+`b1 = (0,1,0,2,0)`,
+
+`b2 = (2,1,0,0,0)`,
+
+`b3 = (0,1,0,0,2)`.
+
+Again the only raw disagreement pair is `0 ~ 2`. Under each transformed law, the images of 0 and 2 remain inside the pair `{0,2}`. Therefore congruence closure forces no third state into the block, and the least common-law congruence has class sizes `(2,1,1,1)`.
+
+### Strengthened sequential form
+
+For the same original systems and common intervention `N`, the exact raw disagreement relations agree at every observed depth through the separating depth:
+
+- depth 0: `{(0,1),(0,2),(0,4),(1,2),(1,4),(2,4)}`;
+- depth 1: `{(0,1),(0,3),(1,3)}`;
+- depth 2: `{(0,2)}`.
+
+The least common-law congruence partitions also agree at depths 0 and 1, but differ at depth 2. Thus the separation is not caused by different raw disagreement sets; it is caused by different propagation of the same disagreement relation under dynamical compatibility.
+
+### Status and novelty boundary
+
+Status: exact finite theorem with a direct proof and regression test.
+
+Generated congruence closure itself is standard universal algebra. The framework-specific content is the separation between raw law disagreement and the information cost of the least dynamically compatible common-law quotient. This theorem should therefore be presented as a structural Law-Genesis separation result, not as a claim that congruence generation is new.
+
 ## Arbitrary-Delay Law-Genesis Separation
 
 ### Statement
