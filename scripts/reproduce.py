@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from examples.delayed_depth_family import verify_depth_family
 from examples.fragility_separation import evaluate as evaluate_fragility
 from examples.nonlinear_depth_witness import SYSTEM_A, SYSTEM_B, summary
 from scripts.exhaustive_small_systems import enumerate_two_law_systems, unordered_family_count
@@ -50,6 +51,35 @@ def write_depth_witness() -> None:
                 ])
 
 
+def write_delayed_depth_family() -> None:
+    rows = []
+    for delay in range(6):
+        result = verify_depth_family(delay)
+        compact = {k: v for k, v in result.items() if k not in {"rows_a", "rows_b"}}
+        rows.append(compact)
+
+    with (RESULTS / "delayed_depth_family.json").open("w", encoding="utf-8") as f:
+        json.dump(rows, f, indent=2)
+        f.write("\n")
+
+    with (RESULTS / "delayed_depth_family.csv").open("w", newline="", encoding="utf-8") as f:
+        fieldnames = [
+            "delay",
+            "state_count",
+            "separating_depth",
+            "all_prior_observables_match",
+            "separates_in_gamma",
+            "gamma_a_at_separation",
+            "gamma_b_at_separation",
+            "class_sizes_a_at_separation",
+            "class_sizes_b_at_separation",
+        ]
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
+
+
 def write_fragility_family() -> None:
     rows = [evaluate_fragility(n) for n in range(2, 9)]
     with (RESULTS / "fragility_separation.json").open("w", encoding="utf-8") as f:
@@ -77,6 +107,7 @@ def write_exhaustive(n: int) -> None:
 
 def main() -> None:
     write_depth_witness()
+    write_delayed_depth_family()
     write_fragility_family()
     write_exhaustive(3)
     write_exhaustive(4)
