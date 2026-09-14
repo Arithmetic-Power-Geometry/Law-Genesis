@@ -12,7 +12,7 @@ Required:
 - Fixed Raw-Disagreement Separation theorem fixed.
 - Exact linear reachability reduction recorded as a novelty boundary.
 
-Status: substantially satisfied.
+Status: satisfied for v1.0.
 
 ## Gate 2 — Nonlinear separation evidence
 
@@ -27,9 +27,7 @@ Status: satisfied by the five-state raw-disagreement theorem and the four-state 
 
 ## Gate 3 — Strong-invariant kill test
 
-Required:
-
-Run the stronger intrinsic search requiring agreement through the matched depths on:
+The stronger intrinsic search required agreement through depths 0, 1, and 2 on:
 
 - Gamma;
 - common-law class-size profile;
@@ -38,13 +36,13 @@ Run the stronger intrinsic search requiring agreement through the matched depths
 - critical seed rank beta;
 - complete one-seed fragility spectrum.
 
-If a witness is found, freeze it. If none is found, freeze the negative result with the precise search domain. Do not silently expand the claim beyond the search domain.
+It tested 96,000 sampled three-law systems across all 24 four-state permutation interventions, with 94,180 cheap-signature collisions and 208,367 strong-signature comparisons. No depth-3 Gamma-separating witness was found.
 
-Status: running in GitHub Actions.
+Status: satisfied as a frozen deterministic negative result for the stated search domain. This is not an impossibility theorem. The result is committed in `results/intrinsic_strong_search.json`.
 
 ## Gate 4 — Prior-art collision pass
 
-Before manuscript drafting, compare the surviving claims specifically against:
+Before manuscript drafting, the surviving claims were compared specifically against:
 
 - generated congruence and finite algebra algorithms;
 - transformation semigroups and synchronizing automata;
@@ -52,8 +50,6 @@ Before manuscript drafting, compare the surviving claims specifically against:
 - finite-state minimization and observational equivalence;
 - control reachability/invariant subspaces;
 - information-theoretic aggregation/lumpability.
-
-The paper must explicitly state every exact reduction or overlap that survives this pass.
 
 Status: satisfied for the current v1.0 claim set. The focused boundary ledger is recorded in `PRIOR_ART_KILL_PASS.md`. Future new theorem families require a fresh collision check.
 
@@ -68,33 +64,36 @@ Required:
 - theorem-status ledger synchronized with the code;
 - no claim in the paper depends only on an uncommitted search log.
 
-Status: nearly satisfied; final synchronization should follow Gate 3.
+Status: satisfied for the checked final-freeze workflow: pytest, reproduction, exhaustive three-state multi-law search, intrinsic four-state search, and strong-invariant search all completed successfully. The strong negative search output is now committed.
 
 ## Gate 6 — Manuscript start condition
 
 Start the flagship foundations manuscript when Gates 1–5 are complete.
 
-At that point the paper should be written around one narrow logical arc:
+Status: TRIGGERED.
+
+The paper should be written around one narrow logical arc:
 
 `microscopic law disagreement -> least compatible common-law congruence -> information cost -> forced abstraction -> fragility -> sequential/intrinsic separation`.
 
-The manuscript should distinguish four classes of statements throughout:
+The manuscript should distinguish these classes of statements throughout:
 
 - proved theorem;
-- exhaustive finite result;
+- exhaustively verified finite result;
 - deterministic computational witness;
+- deterministic negative sampled search;
+- reduction;
 - open conjecture/research direction.
 
 The paper should not claim that generated congruences, reachability, automata products, delay lines, matroid dependence, or standard quotient machinery are new.
 
-## Recommended manuscript trigger
+## Manuscript trigger
 
-The recommended trigger is now:
+The trigger condition has now been met.
 
-1. finish the current strong-invariant intrinsic search;
-2. freeze its witness or precise negative result;
-3. synchronize `THEOREMS.md`, `THEORY_STATUS.md`, generated results, and regression tests;
-4. confirm the complete CI workflow is green;
-5. then begin the paper immediately.
+Recommended next action:
 
-The focused prior-art kill pass is already complete for the present claim set. An arbitrary-depth intrinsic theorem would strengthen the paper further, but it is not required to begin writing once the remaining Gate 3 and Gate 5 tasks are complete. It can remain a clearly labeled open problem if no proof is found after a bounded theorem-search phase.
+1. stop broad v1.0 theory invention;
+2. freeze the present repository result set;
+3. begin the flagship foundations manuscript immediately;
+4. treat arbitrary-depth intrinsic separation and stronger scalable families as future work unless a short proof emerges during manuscript checking.
