@@ -1,0 +1,21 @@
+{
+  "state_count": 4,
+  "law_count": 2,
+  "unordered_law_families": 32896,
+  "groups": [
+    {"gamma": 0.0, "beta": 1, "count": 146, "example_f": [0,0,1,2], "example_g": [0,0,1,2]},
+    {"gamma": 0.0, "beta": 2, "count": 105, "example_f": [0,0,0,1], "example_g": [0,0,0,1]},
+    {"gamma": 0.0, "beta": 3, "count": 5, "example_f": [0,0,0,0], "example_g": [0,0,0,0]},
+    {"gamma": 0.5, "beta": 1, "count": 876, "example_f": [0,0,0,1], "example_g": [0,0,0,2]},
+    {"gamma": 0.5, "beta": 2, "count": 774, "example_f": [0,0,0,0], "example_g": [0,0,0,1]},
+    {"gamma": 0.5, "beta": 3, "count": 6, "example_f": [0,0,0,0], "example_g": [1,1,1,1]},
+    {"gamma": 1.0, "beta": 1, "count": 486, "example_f": [0,0,2,2], "example_g": [0,1,3,2]},
+    {"gamma": 1.0, "beta": 2, "count": 18, "example_f": [0,0,2,2], "example_g": [0,1,2,3]},
+    {"gamma": 1.188721875541, "beta": 1, "count": 11364, "example_f": [0,0,0,0], "example_g": [0,0,1,2]},
+    {"gamma": 1.188721875541, "beta": 2, "count": 300, "example_f": [0,0,0,0], "example_g": [0,0,2,3]},
+    {"gamma": 2.0, "beta": 1, "count": 18452, "example_f": [0,0,0,0], "example_g": [0,2,3,1]},
+    {"gamma": 2.0, "beta": 2, "count": 360, "example_f": [0,0,0,0], "example_g": [0,1,3,2]},
+    {"gamma": 2.0, "beta": 3, "count": 4, "example_f": [0,0,0,0], "example_g": [0,1,2,3]}
+  ],
+  "claim": "Gamma does not determine critical seed rank beta on the enumerated 4-state deterministic systems."
+}
