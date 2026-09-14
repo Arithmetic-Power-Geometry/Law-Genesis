@@ -29,11 +29,15 @@ The cycle-plus-constant family and identity-plus-constant family have the same m
 
 Status: exact finite family; regression tests included.
 
-### Exhaustive three-state check
+### Exhaustive three- and four-state checks
 
-All 378 unordered two-law families on a three-state carrier were enumerated. For every observed Law Genesis Cost value, systems occur with different critical seed ranks. In particular, `Gamma` does not determine `beta` even at three states.
+All 378 unordered two-law families on a three-state carrier and all 32,896 unordered two-law families on a four-state carrier were enumerated.
 
-Status: exhaustive finite computation; frozen machine-readable result in `results/exhaustive_n3_two_law.json`.
+For three states, every observed Law Genesis Cost value occurs with more than one critical seed rank.
+
+For four states, the separation is stronger: systems with the same `Gamma` occur with `beta` values ranging across multiple levels. In particular, at `Gamma = 2` bits there are systems with `beta = 1`, `beta = 2`, and `beta = 3`.
+
+Status: exhaustive finite computation; frozen machine-readable results in `results/exhaustive_n3_two_law.json` and `results/exhaustive_n4_two_law.json`.
 
 ### Nonlinear common-law depth witness
 
