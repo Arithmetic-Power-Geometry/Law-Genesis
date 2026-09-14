@@ -7,6 +7,7 @@ Licensed under the Apache License, Version 2.0.
 from law_genesis.core import (
     apply_word,
     class_sizes,
+    disagreement_pairs,
     least_common_law_congruence,
     law_genesis_cost_uniform,
     protocol_cost_uniform,
@@ -50,6 +51,7 @@ def summary(system):
         laws = transformed_laws(system, depth)
         cost = law_genesis_cost_uniform(system) if depth == 0 else protocol_cost_uniform(system, INTERVENTIONS, word)
         partition = least_common_law_congruence(laws)
+        relation = tuple(sorted(disagreement_pairs(laws)))
         rows.append(
             {
                 "depth": depth,
@@ -57,6 +59,7 @@ def summary(system):
                 "gamma_bits": cost,
                 "class_sizes": class_sizes(partition),
                 "raw_disagreement_pairs": raw_disagreement_count(laws),
+                "raw_disagreement_relation": relation,
                 "beta": critical_seed_rank(laws),
                 "fragility_order1": one_seed_fragility_signature(laws),
             }
